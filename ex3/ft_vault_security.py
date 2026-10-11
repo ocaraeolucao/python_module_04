@@ -1,4 +1,5 @@
-def secure_archive(filename, action='r', content=''):
+def secure_archive(filename: str, action: str = 'r',
+                   content: str = '') -> tuple[bool, str]:
     try:
         if action == 'r':
             with open(filename, 'r') as file_stream:
@@ -8,11 +9,13 @@ def secure_archive(filename, action='r', content=''):
             with open(filename, 'w') as file_stream:
                 file_stream.write(content)
             return (True, 'Content sucessfully written to file')
+        else:
+            return (False, f"Invalid action: '{action}'. Must be 'r' or 'w'.")
     except OSError as e:
         return (False, f"{e}")
 
 
-def main():
+def main() -> None:
     print("=== Cyber Archives Security ===")
     print("\nUsing 'secure_archive' to read from a nonexistent file:")
     print(secure_archive('/not/existing/file', 'r'))
@@ -21,7 +24,7 @@ def main():
     print("\nUsing 'secure_archive' to read from a regular file:")
     read_result = secure_archive('ancient_fragment.txt', 'r')
     print(read_result)
-    print("Using 'secure_archive' to write previous content to a new file:")
+    print("\nUsing 'secure_archive' to write previous content to a new file:")
     if read_result[0] is True:
         print(secure_archive('new_vault_file.txt', 'w', read_result[1]))
 

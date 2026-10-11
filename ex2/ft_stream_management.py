@@ -2,7 +2,7 @@ import sys
 import typing
 
 
-def main():
+def main() -> None:
     if len(sys.argv) != 2:
         print("Usage: python3 ft_stream_management.py <file>")
         return
@@ -10,7 +10,7 @@ def main():
     print("=== Cyber Archives Recovery & Preservation ===")
     print(f"Accessing file '{filename}'")
     try:
-        file_stream: typing.IO = open(filename, 'r')
+        file_stream: typing.IO[str] = open(filename, 'r')
         content = file_stream.read()
         print("---")
         print(content, end="")
@@ -45,7 +45,7 @@ def main():
         else:
             print(f"Saving data to '{new_filename}'")
             try:
-                out_stream: typing.IO = open(new_filename, 'w')
+                out_stream: typing.IO[str] = open(new_filename, 'w')
                 out_stream.write(transformed)
                 out_stream.close()
                 print(f"Data saved in file '{new_filename}'.")
